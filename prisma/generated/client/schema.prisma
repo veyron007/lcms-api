@@ -1,0 +1,115 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model AdditionalInformation {
+  id                             Int                 @id @default(autoincrement())
+  preferred_communication_method String?
+  emergency_contact_name         String?
+  emergency_contact_relationship String?
+  emergency_contact_phone        String?
+  how_did_you_hear_about_us      String?
+  authorization_and_consent      Boolean
+  client_id                      Int
+  PersonalInformation            PersonalInformation @relation(fields: [client_id], references: [id])
+
+  @@index([client_id], map: "AdditionalInformation_client_id_fkey")
+}
+
+model Attachments {
+  id                  Int                 @id @default(autoincrement())
+  client_id           Int
+  document_name       String?
+  document_url        String?
+  PersonalInformation PersonalInformation @relation(fields: [client_id], references: [id])
+
+  @@index([client_id], map: "Attachments_client_id_fkey")
+}
+
+model CaseDetails {
+  id                    Int                 @id @default(autoincrement())
+  nature_of_legal_issue String
+  date_of_incident      DateTime?
+  case_number           String?
+  opposing_parties      String?
+  current_attorney      String?
+  client_id             Int
+  PersonalInformation   PersonalInformation @relation(fields: [client_id], references: [id])
+
+  @@index([client_id], map: "CaseDetails_client_id_fkey")
+}
+
+model ElectronicSignature {
+  id                  Int                 @id @default(autoincrement())
+  client_id           Int
+  signature_image_url String?
+  signature_date      DateTime?
+  PersonalInformation PersonalInformation @relation(fields: [client_id], references: [id])
+
+  @@index([client_id], map: "ElectronicSignature_client_id_fkey")
+}
+
+model FamilyPersonalHistory {
+  id                         Int                 @id @default(autoincrement())
+  marital_status             String?
+  dependents                 Int?
+  health_information         String?
+  child_custody_support_info String?
+  client_id                  Int
+  PersonalInformation        PersonalInformation @relation(fields: [client_id], references: [id])
+
+  @@index([client_id], map: "FamilyPersonalHistory_client_id_fkey")
+}
+
+model FinancialInformation {
+  id                  Int                 @id @default(autoincrement())
+  current_employer    String?
+  job_title           String?
+  income              Float?
+  monthly_expenses    Float?
+  debts               Float?
+  assets              String?
+  liabilities         String?
+  bankruptcy_history  Boolean
+  client_id           Int
+  PersonalInformation PersonalInformation @relation(fields: [client_id], references: [id])
+
+  @@index([client_id], map: "FinancialInformation_client_id_fkey")
+}
+
+model LegalHistory {
+  id                              Int                 @id @default(autoincrement())
+  criminal_history                String?
+  civil_litigation_history        String?
+  legal_restrictions_or_probation String?
+  client_id                       Int
+  PersonalInformation             PersonalInformation @relation(fields: [client_id], references: [id])
+
+  @@index([client_id], map: "LegalHistory_client_id_fkey")
+}
+
+model PersonalInformation {
+  id                     Int                     @id @default(autoincrement())
+  first_name             String
+  middle_name            String?
+  last_name              String
+  address                String?
+  phone_number           String
+  email_address          String
+  date_of_birth          DateTime?
+  social_security_number String?
+  preferred_pronouns     String?
+  AdditionalInformation  AdditionalInformation[]
+  Attachments            Attachments[]
+  CaseDetails            CaseDetails[]
+  ElectronicSignature    ElectronicSignature[]
+  FamilyPersonalHistory  FamilyPersonalHistory[]
+  FinancialInformation   FinancialInformation[]
+  LegalHistory           LegalHistory[]
+}
