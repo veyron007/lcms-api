@@ -101,7 +101,7 @@ model PersonalInformation {
   last_name              String
   address                String?
   phone_number           String
-  email_address          String 
+  email_address          String
   date_of_birth          DateTime?
   social_security_number String?
   preferred_pronouns     String?
@@ -112,4 +112,10 @@ model PersonalInformation {
   FamilyPersonalHistory  FamilyPersonalHistory[]
   FinancialInformation   FinancialInformation[]
   LegalHistory           LegalHistory[]
+}
+
+model UserLogin {
+  id            Int    @id @default(autoincrement())
+  email_address String @unique
+  password      String
 }

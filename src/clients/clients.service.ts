@@ -28,9 +28,7 @@ export class ClientsService {
         return { data: allClients };
 
     }
-    getHello(): string {
-        return 'Hello Client';
-    }
+
 
 
     async createClient(createClientDto: CreateClientDto) {
@@ -52,8 +50,8 @@ export class ClientsService {
                 }
             }
         }
-        catch (obj) {
-            console.log(obj);
+        catch (error) {
+            console.log(error);
             return {
                 'msg': 'some error occured'
             }
@@ -65,18 +63,18 @@ export class ClientsService {
 
     async updateClient(updateClientDto: UpdateClientDto) {
         try {
-            console.log('bogo',updateClientDto.email_address);
+            console.log('bogo', updateClientDto.email_address);
             const client = await this.prisma.personalInformation.findFirst({
-                where:{
-                    email_address:updateClientDto.email_address
+                where: {
+                    email_address: updateClientDto.email_address
                 }
             })
-            console.log('yoyo',client);
-            if(!client){
+            console.log('yoyo', client);
+            if (!client) {
                 return ("User Not found")
             }
             let id = client.id;
-            
+
             const updateclient_result = await this.prisma.personalInformation.update({
                 where: {
                     id: id,
@@ -99,8 +97,8 @@ export class ClientsService {
             }
 
         }
-        catch(error) {
-console.log(error);
+        catch (error) {
+            console.log(error);
 
         }
     }
@@ -109,25 +107,25 @@ console.log(error);
 
 
 
-    async addAdditionalInfo (additionalInformationDto : AdditionalInformationDto){
-        try{
-            console.log('bogo',additionalInformationDto.email_address);
+    async addAdditionalInfo(additionalInformationDto: AdditionalInformationDto) {
+        try {
+            console.log('bogo', additionalInformationDto.email_address);
             const client = await this.prisma.personalInformation.findFirst({
-                where:{
-                    email_address:additionalInformationDto.email_address
+                where: {
+                    email_address: additionalInformationDto.email_address
                 }
             })
-            console.log('yoyo',client);
-            if(!client){
+            console.log('yoyo', client);
+            if (!client) {
                 return ("User Not found")
             }
             let client_id = client.id;
             console.log(additionalInformationDto);
 
             let tuple = {
-            client_id,
-            ...additionalInformationDto
-            
+                client_id,
+                ...additionalInformationDto
+
             }
 
             delete tuple.email_address;
@@ -148,14 +146,14 @@ console.log(error);
                     'msg': 'some error occured'
                 }
             }
-            
+
 
         }
-        catch(error){
+        catch (error) {
             console.log(error);
-            
-            
-            return{
+
+
+            return {
                 error
             }
 

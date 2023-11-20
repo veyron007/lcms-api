@@ -185,6 +185,12 @@ exports.Prisma.PersonalInformationScalarFieldEnum = {
   preferred_pronouns: 'preferred_pronouns'
 };
 
+exports.Prisma.UserLoginScalarFieldEnum = {
+  id: 'id',
+  email_address: 'email_address',
+  password: 'password'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -204,7 +210,8 @@ exports.Prisma.ModelName = {
   FamilyPersonalHistory: 'FamilyPersonalHistory',
   FinancialInformation: 'FinancialInformation',
   LegalHistory: 'LegalHistory',
-  PersonalInformation: 'PersonalInformation'
+  PersonalInformation: 'PersonalInformation',
+  UserLogin: 'UserLogin'
 };
 
 /**

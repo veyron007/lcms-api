@@ -53,6 +53,11 @@ export type LegalHistory = $Result.DefaultSelection<Prisma.$LegalHistoryPayload>
  * 
  */
 export type PersonalInformation = $Result.DefaultSelection<Prisma.$PersonalInformationPayload>
+/**
+ * Model UserLogin
+ * 
+ */
+export type UserLogin = $Result.DefaultSelection<Prisma.$UserLoginPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -255,6 +260,16 @@ export class PrismaClient<
     * ```
     */
   get personalInformation(): Prisma.PersonalInformationDelegate<ExtArgs>;
+
+  /**
+   * `prisma.userLogin`: Exposes CRUD operations for the **UserLogin** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserLogins
+    * const userLogins = await prisma.userLogin.findMany()
+    * ```
+    */
+  get userLogin(): Prisma.UserLoginDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -732,7 +747,8 @@ export namespace Prisma {
     FamilyPersonalHistory: 'FamilyPersonalHistory',
     FinancialInformation: 'FinancialInformation',
     LegalHistory: 'LegalHistory',
-    PersonalInformation: 'PersonalInformation'
+    PersonalInformation: 'PersonalInformation',
+    UserLogin: 'UserLogin'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -749,7 +765,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'additionalInformation' | 'attachments' | 'caseDetails' | 'electronicSignature' | 'familyPersonalHistory' | 'financialInformation' | 'legalHistory' | 'personalInformation'
+      modelProps: 'additionalInformation' | 'attachments' | 'caseDetails' | 'electronicSignature' | 'familyPersonalHistory' | 'financialInformation' | 'legalHistory' | 'personalInformation' | 'userLogin'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1278,6 +1294,72 @@ export namespace Prisma {
           count: {
             args: Prisma.PersonalInformationCountArgs<ExtArgs>,
             result: $Utils.Optional<PersonalInformationCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserLogin: {
+        payload: Prisma.$UserLoginPayload<ExtArgs>
+        fields: Prisma.UserLoginFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserLoginFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserLoginPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserLoginFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserLoginPayload>
+          }
+          findFirst: {
+            args: Prisma.UserLoginFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserLoginPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserLoginFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserLoginPayload>
+          }
+          findMany: {
+            args: Prisma.UserLoginFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserLoginPayload>[]
+          }
+          create: {
+            args: Prisma.UserLoginCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserLoginPayload>
+          }
+          createMany: {
+            args: Prisma.UserLoginCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.UserLoginDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserLoginPayload>
+          }
+          update: {
+            args: Prisma.UserLoginUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserLoginPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserLoginDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserLoginUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.UserLoginUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserLoginPayload>
+          }
+          aggregate: {
+            args: Prisma.UserLoginAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateUserLogin>
+          }
+          groupBy: {
+            args: Prisma.UserLoginGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<UserLoginGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserLoginCountArgs<ExtArgs>,
+            result: $Utils.Optional<UserLoginCountAggregateOutputType> | number
           }
         }
       }
@@ -9517,6 +9599,888 @@ export namespace Prisma {
 
 
   /**
+   * Model UserLogin
+   */
+
+  export type AggregateUserLogin = {
+    _count: UserLoginCountAggregateOutputType | null
+    _avg: UserLoginAvgAggregateOutputType | null
+    _sum: UserLoginSumAggregateOutputType | null
+    _min: UserLoginMinAggregateOutputType | null
+    _max: UserLoginMaxAggregateOutputType | null
+  }
+
+  export type UserLoginAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type UserLoginSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type UserLoginMinAggregateOutputType = {
+    id: number | null
+    email_address: string | null
+    password: string | null
+  }
+
+  export type UserLoginMaxAggregateOutputType = {
+    id: number | null
+    email_address: string | null
+    password: string | null
+  }
+
+  export type UserLoginCountAggregateOutputType = {
+    id: number
+    email_address: number
+    password: number
+    _all: number
+  }
+
+
+  export type UserLoginAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type UserLoginSumAggregateInputType = {
+    id?: true
+  }
+
+  export type UserLoginMinAggregateInputType = {
+    id?: true
+    email_address?: true
+    password?: true
+  }
+
+  export type UserLoginMaxAggregateInputType = {
+    id?: true
+    email_address?: true
+    password?: true
+  }
+
+  export type UserLoginCountAggregateInputType = {
+    id?: true
+    email_address?: true
+    password?: true
+    _all?: true
+  }
+
+  export type UserLoginAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserLogin to aggregate.
+     */
+    where?: UserLoginWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserLogins to fetch.
+     */
+    orderBy?: UserLoginOrderByWithRelationInput | UserLoginOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserLoginWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserLogins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserLogins.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserLogins
+    **/
+    _count?: true | UserLoginCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserLoginAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserLoginSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserLoginMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserLoginMaxAggregateInputType
+  }
+
+  export type GetUserLoginAggregateType<T extends UserLoginAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserLogin]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserLogin[P]>
+      : GetScalarType<T[P], AggregateUserLogin[P]>
+  }
+
+
+
+
+  export type UserLoginGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserLoginWhereInput
+    orderBy?: UserLoginOrderByWithAggregationInput | UserLoginOrderByWithAggregationInput[]
+    by: UserLoginScalarFieldEnum[] | UserLoginScalarFieldEnum
+    having?: UserLoginScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserLoginCountAggregateInputType | true
+    _avg?: UserLoginAvgAggregateInputType
+    _sum?: UserLoginSumAggregateInputType
+    _min?: UserLoginMinAggregateInputType
+    _max?: UserLoginMaxAggregateInputType
+  }
+
+  export type UserLoginGroupByOutputType = {
+    id: number
+    email_address: string
+    password: string
+    _count: UserLoginCountAggregateOutputType | null
+    _avg: UserLoginAvgAggregateOutputType | null
+    _sum: UserLoginSumAggregateOutputType | null
+    _min: UserLoginMinAggregateOutputType | null
+    _max: UserLoginMaxAggregateOutputType | null
+  }
+
+  type GetUserLoginGroupByPayload<T extends UserLoginGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserLoginGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserLoginGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserLoginGroupByOutputType[P]>
+            : GetScalarType<T[P], UserLoginGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserLoginSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email_address?: boolean
+    password?: boolean
+  }, ExtArgs["result"]["userLogin"]>
+
+  export type UserLoginSelectScalar = {
+    id?: boolean
+    email_address?: boolean
+    password?: boolean
+  }
+
+
+  export type $UserLoginPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserLogin"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      email_address: string
+      password: string
+    }, ExtArgs["result"]["userLogin"]>
+    composites: {}
+  }
+
+
+  type UserLoginGetPayload<S extends boolean | null | undefined | UserLoginDefaultArgs> = $Result.GetResult<Prisma.$UserLoginPayload, S>
+
+  type UserLoginCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<UserLoginFindManyArgs, 'select' | 'include'> & {
+      select?: UserLoginCountAggregateInputType | true
+    }
+
+  export interface UserLoginDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserLogin'], meta: { name: 'UserLogin' } }
+    /**
+     * Find zero or one UserLogin that matches the filter.
+     * @param {UserLoginFindUniqueArgs} args - Arguments to find a UserLogin
+     * @example
+     * // Get one UserLogin
+     * const userLogin = await prisma.userLogin.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends UserLoginFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, UserLoginFindUniqueArgs<ExtArgs>>
+    ): Prisma__UserLoginClient<$Result.GetResult<Prisma.$UserLoginPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one UserLogin that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {UserLoginFindUniqueOrThrowArgs} args - Arguments to find a UserLogin
+     * @example
+     * // Get one UserLogin
+     * const userLogin = await prisma.userLogin.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends UserLoginFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserLoginFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__UserLoginClient<$Result.GetResult<Prisma.$UserLoginPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first UserLogin that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserLoginFindFirstArgs} args - Arguments to find a UserLogin
+     * @example
+     * // Get one UserLogin
+     * const userLogin = await prisma.userLogin.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends UserLoginFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserLoginFindFirstArgs<ExtArgs>>
+    ): Prisma__UserLoginClient<$Result.GetResult<Prisma.$UserLoginPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first UserLogin that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserLoginFindFirstOrThrowArgs} args - Arguments to find a UserLogin
+     * @example
+     * // Get one UserLogin
+     * const userLogin = await prisma.userLogin.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends UserLoginFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserLoginFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__UserLoginClient<$Result.GetResult<Prisma.$UserLoginPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more UserLogins that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserLoginFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserLogins
+     * const userLogins = await prisma.userLogin.findMany()
+     * 
+     * // Get first 10 UserLogins
+     * const userLogins = await prisma.userLogin.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userLoginWithIdOnly = await prisma.userLogin.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends UserLoginFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserLoginFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserLoginPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a UserLogin.
+     * @param {UserLoginCreateArgs} args - Arguments to create a UserLogin.
+     * @example
+     * // Create one UserLogin
+     * const UserLogin = await prisma.userLogin.create({
+     *   data: {
+     *     // ... data to create a UserLogin
+     *   }
+     * })
+     * 
+    **/
+    create<T extends UserLoginCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, UserLoginCreateArgs<ExtArgs>>
+    ): Prisma__UserLoginClient<$Result.GetResult<Prisma.$UserLoginPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many UserLogins.
+     *     @param {UserLoginCreateManyArgs} args - Arguments to create many UserLogins.
+     *     @example
+     *     // Create many UserLogins
+     *     const userLogin = await prisma.userLogin.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends UserLoginCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserLoginCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a UserLogin.
+     * @param {UserLoginDeleteArgs} args - Arguments to delete one UserLogin.
+     * @example
+     * // Delete one UserLogin
+     * const UserLogin = await prisma.userLogin.delete({
+     *   where: {
+     *     // ... filter to delete one UserLogin
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends UserLoginDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, UserLoginDeleteArgs<ExtArgs>>
+    ): Prisma__UserLoginClient<$Result.GetResult<Prisma.$UserLoginPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one UserLogin.
+     * @param {UserLoginUpdateArgs} args - Arguments to update one UserLogin.
+     * @example
+     * // Update one UserLogin
+     * const userLogin = await prisma.userLogin.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends UserLoginUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, UserLoginUpdateArgs<ExtArgs>>
+    ): Prisma__UserLoginClient<$Result.GetResult<Prisma.$UserLoginPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more UserLogins.
+     * @param {UserLoginDeleteManyArgs} args - Arguments to filter UserLogins to delete.
+     * @example
+     * // Delete a few UserLogins
+     * const { count } = await prisma.userLogin.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends UserLoginDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserLoginDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserLogins.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserLoginUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserLogins
+     * const userLogin = await prisma.userLogin.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends UserLoginUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, UserLoginUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one UserLogin.
+     * @param {UserLoginUpsertArgs} args - Arguments to update or create a UserLogin.
+     * @example
+     * // Update or create a UserLogin
+     * const userLogin = await prisma.userLogin.upsert({
+     *   create: {
+     *     // ... data to create a UserLogin
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserLogin we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends UserLoginUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, UserLoginUpsertArgs<ExtArgs>>
+    ): Prisma__UserLoginClient<$Result.GetResult<Prisma.$UserLoginPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of UserLogins.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserLoginCountArgs} args - Arguments to filter UserLogins to count.
+     * @example
+     * // Count the number of UserLogins
+     * const count = await prisma.userLogin.count({
+     *   where: {
+     *     // ... the filter for the UserLogins we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserLoginCountArgs>(
+      args?: Subset<T, UserLoginCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserLoginCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserLogin.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserLoginAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserLoginAggregateArgs>(args: Subset<T, UserLoginAggregateArgs>): Prisma.PrismaPromise<GetUserLoginAggregateType<T>>
+
+    /**
+     * Group by UserLogin.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserLoginGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserLoginGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserLoginGroupByArgs['orderBy'] }
+        : { orderBy?: UserLoginGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserLoginGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserLoginGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserLogin model
+   */
+  readonly fields: UserLoginFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserLogin.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserLoginClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the UserLogin model
+   */ 
+  interface UserLoginFieldRefs {
+    readonly id: FieldRef<"UserLogin", 'Int'>
+    readonly email_address: FieldRef<"UserLogin", 'String'>
+    readonly password: FieldRef<"UserLogin", 'String'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * UserLogin findUnique
+   */
+  export type UserLoginFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserLogin
+     */
+    select?: UserLoginSelect<ExtArgs> | null
+    /**
+     * Filter, which UserLogin to fetch.
+     */
+    where: UserLoginWhereUniqueInput
+  }
+
+
+  /**
+   * UserLogin findUniqueOrThrow
+   */
+  export type UserLoginFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserLogin
+     */
+    select?: UserLoginSelect<ExtArgs> | null
+    /**
+     * Filter, which UserLogin to fetch.
+     */
+    where: UserLoginWhereUniqueInput
+  }
+
+
+  /**
+   * UserLogin findFirst
+   */
+  export type UserLoginFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserLogin
+     */
+    select?: UserLoginSelect<ExtArgs> | null
+    /**
+     * Filter, which UserLogin to fetch.
+     */
+    where?: UserLoginWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserLogins to fetch.
+     */
+    orderBy?: UserLoginOrderByWithRelationInput | UserLoginOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserLogins.
+     */
+    cursor?: UserLoginWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserLogins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserLogins.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserLogins.
+     */
+    distinct?: UserLoginScalarFieldEnum | UserLoginScalarFieldEnum[]
+  }
+
+
+  /**
+   * UserLogin findFirstOrThrow
+   */
+  export type UserLoginFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserLogin
+     */
+    select?: UserLoginSelect<ExtArgs> | null
+    /**
+     * Filter, which UserLogin to fetch.
+     */
+    where?: UserLoginWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserLogins to fetch.
+     */
+    orderBy?: UserLoginOrderByWithRelationInput | UserLoginOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserLogins.
+     */
+    cursor?: UserLoginWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserLogins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserLogins.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserLogins.
+     */
+    distinct?: UserLoginScalarFieldEnum | UserLoginScalarFieldEnum[]
+  }
+
+
+  /**
+   * UserLogin findMany
+   */
+  export type UserLoginFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserLogin
+     */
+    select?: UserLoginSelect<ExtArgs> | null
+    /**
+     * Filter, which UserLogins to fetch.
+     */
+    where?: UserLoginWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserLogins to fetch.
+     */
+    orderBy?: UserLoginOrderByWithRelationInput | UserLoginOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserLogins.
+     */
+    cursor?: UserLoginWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserLogins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserLogins.
+     */
+    skip?: number
+    distinct?: UserLoginScalarFieldEnum | UserLoginScalarFieldEnum[]
+  }
+
+
+  /**
+   * UserLogin create
+   */
+  export type UserLoginCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserLogin
+     */
+    select?: UserLoginSelect<ExtArgs> | null
+    /**
+     * The data needed to create a UserLogin.
+     */
+    data: XOR<UserLoginCreateInput, UserLoginUncheckedCreateInput>
+  }
+
+
+  /**
+   * UserLogin createMany
+   */
+  export type UserLoginCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserLogins.
+     */
+    data: UserLoginCreateManyInput | UserLoginCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * UserLogin update
+   */
+  export type UserLoginUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserLogin
+     */
+    select?: UserLoginSelect<ExtArgs> | null
+    /**
+     * The data needed to update a UserLogin.
+     */
+    data: XOR<UserLoginUpdateInput, UserLoginUncheckedUpdateInput>
+    /**
+     * Choose, which UserLogin to update.
+     */
+    where: UserLoginWhereUniqueInput
+  }
+
+
+  /**
+   * UserLogin updateMany
+   */
+  export type UserLoginUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserLogins.
+     */
+    data: XOR<UserLoginUpdateManyMutationInput, UserLoginUncheckedUpdateManyInput>
+    /**
+     * Filter which UserLogins to update
+     */
+    where?: UserLoginWhereInput
+  }
+
+
+  /**
+   * UserLogin upsert
+   */
+  export type UserLoginUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserLogin
+     */
+    select?: UserLoginSelect<ExtArgs> | null
+    /**
+     * The filter to search for the UserLogin to update in case it exists.
+     */
+    where: UserLoginWhereUniqueInput
+    /**
+     * In case the UserLogin found by the `where` argument doesn't exist, create a new UserLogin with this data.
+     */
+    create: XOR<UserLoginCreateInput, UserLoginUncheckedCreateInput>
+    /**
+     * In case the UserLogin was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserLoginUpdateInput, UserLoginUncheckedUpdateInput>
+  }
+
+
+  /**
+   * UserLogin delete
+   */
+  export type UserLoginDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserLogin
+     */
+    select?: UserLoginSelect<ExtArgs> | null
+    /**
+     * Filter which UserLogin to delete.
+     */
+    where: UserLoginWhereUniqueInput
+  }
+
+
+  /**
+   * UserLogin deleteMany
+   */
+  export type UserLoginDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserLogins to delete
+     */
+    where?: UserLoginWhereInput
+  }
+
+
+  /**
+   * UserLogin without action
+   */
+  export type UserLoginDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserLogin
+     */
+    select?: UserLoginSelect<ExtArgs> | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -9630,6 +10594,15 @@ export namespace Prisma {
   };
 
   export type PersonalInformationScalarFieldEnum = (typeof PersonalInformationScalarFieldEnum)[keyof typeof PersonalInformationScalarFieldEnum]
+
+
+  export const UserLoginScalarFieldEnum: {
+    id: 'id',
+    email_address: 'email_address',
+    password: 'password'
+  };
+
+  export type UserLoginScalarFieldEnum = (typeof UserLoginScalarFieldEnum)[keyof typeof UserLoginScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -10235,6 +11208,50 @@ export namespace Prisma {
     preferred_pronouns?: StringNullableWithAggregatesFilter<"PersonalInformation"> | string | null
   }
 
+  export type UserLoginWhereInput = {
+    AND?: UserLoginWhereInput | UserLoginWhereInput[]
+    OR?: UserLoginWhereInput[]
+    NOT?: UserLoginWhereInput | UserLoginWhereInput[]
+    id?: IntFilter<"UserLogin"> | number
+    email_address?: StringFilter<"UserLogin"> | string
+    password?: StringFilter<"UserLogin"> | string
+  }
+
+  export type UserLoginOrderByWithRelationInput = {
+    id?: SortOrder
+    email_address?: SortOrder
+    password?: SortOrder
+  }
+
+  export type UserLoginWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    email_address?: string
+    AND?: UserLoginWhereInput | UserLoginWhereInput[]
+    OR?: UserLoginWhereInput[]
+    NOT?: UserLoginWhereInput | UserLoginWhereInput[]
+    password?: StringFilter<"UserLogin"> | string
+  }, "id" | "email_address">
+
+  export type UserLoginOrderByWithAggregationInput = {
+    id?: SortOrder
+    email_address?: SortOrder
+    password?: SortOrder
+    _count?: UserLoginCountOrderByAggregateInput
+    _avg?: UserLoginAvgOrderByAggregateInput
+    _max?: UserLoginMaxOrderByAggregateInput
+    _min?: UserLoginMinOrderByAggregateInput
+    _sum?: UserLoginSumOrderByAggregateInput
+  }
+
+  export type UserLoginScalarWhereWithAggregatesInput = {
+    AND?: UserLoginScalarWhereWithAggregatesInput | UserLoginScalarWhereWithAggregatesInput[]
+    OR?: UserLoginScalarWhereWithAggregatesInput[]
+    NOT?: UserLoginScalarWhereWithAggregatesInput | UserLoginScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"UserLogin"> | number
+    email_address?: StringWithAggregatesFilter<"UserLogin"> | string
+    password?: StringWithAggregatesFilter<"UserLogin"> | string
+  }
+
   export type AdditionalInformationCreateInput = {
     preferred_communication_method?: string | null
     emergency_contact_name?: string | null
@@ -10776,6 +11793,45 @@ export namespace Prisma {
     date_of_birth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     social_security_number?: NullableStringFieldUpdateOperationsInput | string | null
     preferred_pronouns?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UserLoginCreateInput = {
+    email_address: string
+    password: string
+  }
+
+  export type UserLoginUncheckedCreateInput = {
+    id?: number
+    email_address: string
+    password: string
+  }
+
+  export type UserLoginUpdateInput = {
+    email_address?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserLoginUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email_address?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserLoginCreateManyInput = {
+    id?: number
+    email_address: string
+    password: string
+  }
+
+  export type UserLoginUpdateManyMutationInput = {
+    email_address?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserLoginUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email_address?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -11356,6 +12412,32 @@ export namespace Prisma {
   }
 
   export type PersonalInformationSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type UserLoginCountOrderByAggregateInput = {
+    id?: SortOrder
+    email_address?: SortOrder
+    password?: SortOrder
+  }
+
+  export type UserLoginAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type UserLoginMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email_address?: SortOrder
+    password?: SortOrder
+  }
+
+  export type UserLoginMinOrderByAggregateInput = {
+    id?: SortOrder
+    email_address?: SortOrder
+    password?: SortOrder
+  }
+
+  export type UserLoginSumOrderByAggregateInput = {
     id?: SortOrder
   }
 
@@ -13256,6 +14338,10 @@ export namespace Prisma {
      * @deprecated Use PersonalInformationDefaultArgs instead
      */
     export type PersonalInformationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PersonalInformationDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use UserLoginDefaultArgs instead
+     */
+    export type UserLoginArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserLoginDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

@@ -113,3 +113,9 @@ model PersonalInformation {
   FinancialInformation   FinancialInformation[]
   LegalHistory           LegalHistory[]
 }
+
+model UserLogin {
+  id            Int    @id @default(autoincrement())
+  email_address String @unique
+  password      String
+}
